@@ -1,0 +1,18 @@
+library(grid)
+library(svgparser)
+# remotes::install_github('coolbutuseless/minisvg')
+library(minisvg)
+
+# Create SVG document
+svg <- minisvg::svg_doc(width = 100, height = 100, fill = "#ECD078")
+svg$rect(x = 20, y = 20, width = 60, height = 60, fill = "#542437", stroke = "grey70", stroke_width = 10)
+svg$rect(x = 5, y = 5, width = 40, height = 40, opacity = 0.8, rx = "20%")
+svg$rect(x = 55, y = 5, width = 40, height = 40, opacity = 0.8, rx = "20%")
+svg$rect(x = 5, y = 55, width = 40, height = 40, opacity = 0.8, rx = "20%")
+svg$rect(x = 55, y = 55, width = 40, height = 40, opacity = 0.8, rx = "20%")
+
+
+# Convert SVG document to a grid graphics object i.e. a 'grob'
+g <- read_svg(svg$as_character())
+grid.newpage()
+grid.draw(g)
